@@ -1,0 +1,63 @@
+<div id="main">
+<div id="main1">
+<h2 id="name">My To DO List</h2>
+<div class="search">
+  <label for="filtercss">Filter</label>
+  <label for="searchid"style="padding-left:13%">Search</label><br>
+  <select name="prior" [(ngModel)]="filterInput"id="filtercss">
+      <option id="prior" value="-select-">-select-</option>
+      <option id="prior" value="High">High</option>
+      <option id="prior" value="Medium">Medium</option>
+      <option id="prior" value="Low">Low</option>
+  </select>&nbsp;&nbsp;&nbsp;
+  <input type="text" [(ngModel)]="userInput"placeholder="Search"id="searchid">
+</div><br><br><br>
+<label for="itemname">Item Name : </label>
+<input [(ngModel)]="itemname" name="name" placeholder="item name"id="itemname">&nbsp;&nbsp;&nbsp;  
+<label for="itemprice">Item Price :</label>  
+<input [(ngModel)]="price" name="price" placeholder="item price"id="itemprice">
+<br><br>
+<label for="itemtype">Item Category :</label>
+<label for="itempriority" style="padding-left: 9%;">Item Priority :</label><br>
+
+<select [(ngModel)]="itemtype" name="itemtype" id="itemtype">
+  <option value="electronic">Electronic Devices</option>
+  <option value="cloths">Cloths</option>
+  <option value="accessories">Accessories</option>
+</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<select [(ngModel)]="itempriority" id="itempriority" name="itempriority" style="width: 100px;">
+  <option value="high">High</option>
+  <option value="medium">Medium</option>
+  <option value="low">Low</option>
+</select><br><br>
+<label for ="date">Date:</label>
+<input id="date" [(ngModel)]="date" name="date" type="date" style="width: 10%;"><br><br>
+
+<label for="description">Item Description:</label>
+<input [(ngModel)]="itemdescription" id="description" name="itemdescription" type="text" style="height: 100px;"><br><br>
+
+<button (click) = "fbAddItems()">Add Item</button>
+
+<br><br>
+
+<table border="1"class="table-responsive-xs">
+  <tr>
+    <th>ItemCategory</th>
+    <th>Description</th>
+    <th>Item Price</th>
+    <th>Priority</th>
+    <th>Date</th>
+  </tr>
+    <tr *ngFor="let item of items | async | filter:filterInput | search:userInput">
+        <td>{{ item.itemname }}</td>
+        <td>{{ item.itemdescription }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.itempriority }}</td>
+        <td>{{ item.date }}</td>
+        <td><button (click)="delete()">Delete</button></td>
+        <td><button (click)="Update(update, item)">update</button></td>
+    </tr>
+</table>
+</div>
+</div>
